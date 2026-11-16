@@ -1,1249 +1,350 @@
 
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>L'invisibilité optique</title>
-
+<meta name="theme-color" content="#090b24">
+<title>L'invisibilité optique | Dossier secret</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
-
-:root {
-  --night: #090b24;
-  --blue: #11183b;
-  --violet: #30205e;
-  --purple: #7652ad;
-  --gold: #e7c77e;
-  --white: #fff;
-  --soft: #dce2ff;
-  --muted: #bdc5e2;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html, body {
-  margin: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background: var(--night);
-  color: var(--white);
-  font-family: Montserrat, Arial, sans-serif;
-}
-
-body {
-  background:
-    radial-gradient(ellipse at 75% 15%, #30205e 0, transparent 34%),
-    radial-gradient(ellipse at 10% 85%, #142451 0, transparent 38%),
-    linear-gradient(125deg, #080a20, #111433 60%, #090b24);
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  opacity: .5;
-  background-image:
-    radial-gradient(#fff 1px, transparent 1.5px),
-    radial-gradient(#d8c4ff 1px, transparent 1.5px);
-  background-size: 83px 83px, 137px 137px;
-  background-position: 0 0, 35px 45px;
-}
-
-header {
-  height: 66px;
-  position: fixed;
-  z-index: 20;
-  top: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 4vw;
-  background: #090b24c9;
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid #e7c77e33;
-}
-
-.logo {
-  font: 600 13px Cinzel, serif;
-  letter-spacing: .16em;
-  color: var(--gold);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.seal {
-  width: 34px;
-  height: 34px;
-  border: 1px solid var(--gold);
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  font-size: 19px;
-}
-
-nav {
-  display: flex;
-  gap: 8px;
-}
-
-nav button {
-  border: 0;
-  background: transparent;
-  color: #dce2ff;
-  padding: 9px 12px;
-  font: 500 10px Montserrat;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-nav button.active,
-nav button:hover {
-  color: var(--gold);
-}
-
-.counter {
-  font-size: 11px;
-  letter-spacing: .15em;
-  color: var(--muted);
-  min-width: 54px;
-  text-align: right;
-}
-
-.deck {
-  height: 100vh;
-  width: 100vw;
-  padding: 86px 5vw 76px;
-  position: relative;
-}
-
-.slide {
-  display: none;
-  width: 100%;
-  height: 100%;
-  max-width: 1400px;
-  margin: auto;
-  animation: appear .55s ease;
-  position: relative;
-}
-
-.slide.active {
-  display: flex;
-  align-items: center;
-}
-
-@keyframes appear {
-  from {
-    opacity: 0;
-    transform: translateX(22px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-.content {
-  width: 100%;
-  max-height: 100%;
-  overflow: auto;
-  padding: 12px 1vw;
-}
-
-.kicker {
-  color: var(--gold);
-  font-size: 10px;
-  letter-spacing: .28em;
-  text-transform: uppercase;
-  margin-bottom: 18px;
-}
-
-h1, h2, h3 {
-  font-family: Cinzel, Georgia, serif;
-  font-weight: 500;
-  margin: 0;
-}
-
-h1 {
-  font-size: clamp(40px, 6vw, 82px);
-  line-height: 1.08;
-}
-
-h1 span {
-  display: block;
-  color: var(--gold);
-}
-
-h2 {
-  font-size: clamp(28px, 4vw, 52px);
-  line-height: 1.15;
-  margin-bottom: 16px;
-}
-
-h3 {
-  font-size: 19px;
-  color: var(--gold);
-  margin-bottom: 12px;
-}
-
-p {
-  color: var(--soft);
-  font-size: clamp(13px, 1.25vw, 17px);
-  line-height: 1.75;
-  margin: 12px 0;
-}
-
-.small {
-  font-size: 11px;
-  color: var(--muted);
-  letter-spacing: .08em;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4vw;
-  align-items: center;
-}
-
-.hero-grid {
-  grid-template-columns: 1.05fr .95fr;
-}
-
-.hero-text {
-  max-width: 700px;
-}
-
-.subtitle {
-  font-size: clamp(15px, 1.5vw, 19px);
-  max-width: 650px;
-  margin-top: 22px;
-}
-
-.btn {
-  border: 1px solid var(--gold);
-  background: transparent;
-  color: #fff;
-  padding: 13px 19px;
-  text-transform: uppercase;
-  letter-spacing: .12em;
-  font: 600 10px Montserrat;
-  cursor: pointer;
-  transition: .25s;
-}
-
-.btn.gold {
-  background: linear-gradient(120deg, #f0d99b, #bd9651);
-  color: #151027;
-  border: 0;
-}
-
-.btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 0 25px #b99ae855;
-}
-
-.actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 27px;
-}
-
-/* Opening image */
-
-.hero-image {
-  height: min(62vh, 550px);
-  min-height: 330px;
-  position: relative;
-  border: 1px solid #e7c77e66;
-  background: linear-gradient(145deg, #17143b, #090b24);
-  box-shadow: 0 0 55px #6b48a755;
-  overflow: hidden;
-}
-
-.hero-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.image-fallback {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  background: radial-gradient(circle at 50% 40%, #7552a8 0, #282052 38%, #090b24 75%);
-}
-
-.image-fallback svg {
-  width: 100%;
-  height: 100%;
-}
-
-.image-caption {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 14px 18px;
-  background: linear-gradient(transparent, #08091dcc);
-  font: 11px Cinzel;
-  letter-spacing: .12em;
-  color: #fff;
-}
-
-.magic-frame {
-  position: absolute;
-  inset: 13px;
-  border: 1px solid #e7c77e77;
-  pointer-events: none;
-}
-
-.card {
-  background: linear-gradient(145deg, #1a1b43dd, #11132feF);
-  border: 1px solid #b7a2e64a;
-  padding: 23px;
-  box-shadow: 0 12px 35px #05061755;
-}
-
-.card p {
-  font-size: 13px;
-}
-
-.riddle {
-  font: clamp(18px, 2vw, 25px)/1.6 Cinzel, serif;
-  color: #fff;
-}
-
-.reveal {
-  display: none;
-  color: var(--gold);
-  font: 600 19px Cinzel;
-  margin-top: 18px;
-  padding-top: 16px;
-  border-top: 1px solid #e7c77e55;
-}
-
-.reveal.show {
-  display: block;
-}
-
-.equations {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-.eq {
-  background: #0b0e2b;
-  border: 1px solid #8d7cc255;
-  color: white;
-  text-align: left;
-  padding: 18px;
-  min-height: 112px;
-  cursor: pointer;
-}
-
-.eq.active,
-.eq:hover {
-  border-color: var(--gold);
-  background: #28204e;
-}
-
-.formula {
-  display: block;
-  color: #f3d995;
-  font: 22px Georgia;
-  margin-bottom: 10px;
-}
-
-.eq small {
-  color: #cbd2f0;
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-}
-
-.explain {
-  border-left: 3px solid var(--gold);
-  background: #e7c77e12;
-  padding: 17px;
-  margin-top: 12px;
-  color: #fff;
-  font-size: 13px;
-  line-height: 1.7;
-  min-height: 85px;
-}
-
-.diagram {
-  background: radial-gradient(circle at 50% 45%, #46327388, transparent 60%), #0d1030;
-  border: 1px solid #a994dc55;
-  padding: 10px;
-  min-height: 320px;
-  display: grid;
-  place-items: center;
-}
-
-.diagram svg {
-  width: 100%;
-  max-height: 390px;
-}
-
-.tiles {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  margin-top: 20px;
-}
-
-.tile {
-  background: #111431;
-  border: 1px solid #8d7cc255;
-  padding: 18px;
-}
-
-.tile b {
-  color: var(--gold);
-  font: 14px Cinzel;
-}
-
-.tile p {
-  font-size: 12px;
-  margin-bottom: 0;
-}
-
-.quote {
-  font: clamp(23px, 3.4vw, 43px)/1.5 Cinzel;
-  color: white;
-  text-align: center;
-  max-width: 950px;
-  margin: 25px auto;
-}
-
-.quote span {
-  color: var(--gold);
-}
-
-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 58px;
-  z-index: 20;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 4vw;
-  background: #090b24cc;
-  border-top: 1px solid #e7c77e33;
-}
-
-.controls {
-  display: flex;
-  gap: 10px;
-}
-
-.controls button {
-  background: #17183a;
-  border: 1px solid #e7c77e77;
-  color: white;
-  padding: 9px 15px;
-  cursor: pointer;
-}
-
-.controls button:hover {
-  background: #34245e;
-}
-
-.progress {
-  height: 2px;
-  background: #e7c77e;
-  position: fixed;
-  bottom: 58px;
-  left: 0;
-  width: 14.28%;
-  z-index: 25;
-  transition: width .3s;
-}
-
-/* Responsive layout */
-
-@media(max-width: 800px) {
-  header {
-    padding: 0 14px;
-  }
-
-  .logo {
-    font-size: 10px;
-  }
-
-  nav {
-    display: none;
-  }
-
-  .deck {
-    padding: 82px 18px 72px;
-  }
-
-  .slide.active {
-    align-items: flex-start;
-  }
-
-  .content {
-    padding-top: 14px;
-  }
-
-  .grid,
-  .hero-grid {
-    grid-template-columns: 1fr;
-    gap: 18px;
-  }
-
-  .hero-image {
-    height: 32vh;
-    min-height: 190px;
-    order: -1;
-  }
-
-  .hero h1 {
-    font-size: clamp(34px, 10vw, 58px);
-  }
-
-  .hero .subtitle {
-    margin-top: 12px;
-  }
-
-  .actions {
-    margin-top: 15px;
-  }
-
-  .diagram {
-    min-height: 210px;
-  }
-
-  .tiles {
-    grid-template-columns: 1fr;
-  }
-
-  .tile {
-    padding: 13px;
-  }
-
-  .card {
-    padding: 17px;
-  }
-
-  .equations {
-    gap: 8px;
-  }
-
-  .eq {
-    padding: 12px;
-    min-height: 94px;
-  }
-
-  .formula {
-    font-size: 18px;
-  }
-
-  .section-title {
-    font-size: 30px;
-  }
-
-  footer {
-    padding: 0 14px;
-  }
-
-  .small {
-    font-size: 9px;
-  }
-}
-
-@media(max-height: 650px) and (min-width: 801px) {
-  .deck {
-    padding-top: 75px;
-    padding-bottom: 65px;
-  }
-
-  .hero-image {
-    height: 68vh;
-    min-height: 0;
-  }
-
-  .content {
-    padding-top: 0;
-  }
-
-  .diagram {
-    min-height: 230px;
-  }
+:root{--night:#090b24;--blue:#11183b;--violet:#30205e;--purple:#7652ad;--gold:#e7c77e;--white:#fff;--soft:#dce2ff;--muted:#bdc5e2}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--night);color:var(--white);font-family:Montserrat,Arial,sans-serif}
+body{background:radial-gradient(ellipse at 75% 15%,#30205e 0,transparent 34%),radial-gradient(ellipse at 10% 85%,#142451 0,transparent 38%),linear-gradient(125deg,#080a20,#111433 60%,#090b24)}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.5;background-image:radial-gradient(#fff 1px,transparent 1.5px),radial-gradient(#d8c4ff 1px,transparent 1.5px);background-size:83px 83px,137px 137px;background-position:0 0,35px 45px}
+header{height:66px;position:fixed;z-index:20;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:0 4vw;background:#090b24c9;backdrop-filter:blur(14px);border-bottom:1px solid #e7c77e33}
+.logo{font:600 13px Cinzel,serif;letter-spacing:.16em;color:var(--gold);display:flex;align-items:center;gap:12px}
+.seal{width:34px;height:34px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;font-size:19px}
+nav{display:flex;gap:8px}
+nav button{border:0;background:transparent;color:#dce2ff;padding:9px 12px;font:500 10px Montserrat;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+nav button.active,nav button:hover{color:var(--gold)}
+.counter{font-size:11px;letter-spacing:.15em;color:var(--muted);min-width:54px;text-align:right}
+.deck{height:100vh;width:100vw;padding:86px 5vw 76px;position:relative}
+.slide{display:none;width:100%;height:100%;max-width:1400px;margin:auto;animation:appear .55s ease;position:relative}
+.slide.active{display:flex;align-items:center}
+@keyframes appear{from{opacity:0;transform:translateX(22px)}to{opacity:1;transform:none}}
+.content{width:100%;max-height:100%;overflow:auto;padding:12px 1vw}
+.kicker{color:var(--gold);font-size:10px;letter-spacing:.28em;text-transform:uppercase;margin-bottom:18px}
+h1,h2,h3{font-family:Cinzel,Georgia,serif;font-weight:500;margin:0}
+h1{font-size:clamp(40px,6vw,82px);line-height:1.08;letter-spacing:.01em}
+h1 span{display:block;color:var(--gold)}
+h2{font-size:clamp(28px,4vw,52px);line-height:1.15;margin-bottom:16px}
+h3{font-size:19px;color:var(--gold);margin-bottom:12px}
+p{color:var(--soft);font-size:clamp(13px,1.25vw,17px);line-height:1.75;margin:12px 0}
+.small{font-size:11px;color:var(--muted);letter-spacing:.08em}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:4vw;align-items:center}
+.hero-grid{grid-template-columns:1.05fr .95fr}
+.hero-text{max-width:700px}
+.subtitle{font-size:clamp(15px,1.5vw,19px);max-width:650px;margin-top:22px}
+.authors{margin-top:20px;padding-top:14px;border-top:1px solid #e7c77e55;max-width:560px}
+.authors-label{color:var(--muted);font-size:10px;letter-spacing:.22em;text-transform:uppercase;margin:0 0 6px}
+.authors-names{font:600 clamp(13px,1.35vw,17px) Montserrat,Arial,sans-serif;color:var(--gold);letter-spacing:.04em;margin:0 0 4px}
+.authors-note{font-size:10px;color:#c6b7e5;letter-spacing:.16em;text-transform:uppercase;margin:0}
+.btn{border:1px solid var(--gold);background:transparent;color:#fff;padding:13px 19px;text-transform:uppercase;letter-spacing:.12em;font:600 10px Montserrat;cursor:pointer;transition:.25s}
+.btn.gold{background:linear-gradient(120deg,#f0d99b,#bd9651);color:#151027;border:0}
+.btn:hover{transform:translateY(-3px);box-shadow:0 0 25px #b99ae855}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:27px}
+.hero-image{height:min(62vh,550px);min-height:330px;position:relative;border:1px solid #e7c77e66;background:linear-gradient(145deg,#17143b,#090b24);box-shadow:0 0 55px #6b48a755;overflow:hidden}
+.hero-image img{width:100%;height:100%;object-fit:cover;display:block}
+.image-fallback{position:absolute;inset:0;display:grid;place-items:center;background:radial-gradient(circle at 50% 40%,#7552a8 0,#282052 38%,#090b24 75%)}
+.image-fallback svg{width:100%;height:100%}
+.image-caption{position:absolute;bottom:0;left:0;right:0;padding:14px 18px;background:linear-gradient(transparent,#08091dcc);font:11px Cinzel;letter-spacing:.12em;color:#fff}
+.magic-frame{position:absolute;inset:13px;border:1px solid #e7c77e77;pointer-events:none}
+.card{background:linear-gradient(145deg,#1a1b43dd,#11132feF);border:1px solid #b7a2e64a;padding:23px;box-shadow:0 12px 35px #05061755}
+.card p{font-size:13px}
+.riddle{font:clamp(18px,2vw,25px)/1.6 Cinzel,serif;color:#fff}
+.reveal{display:none;color:var(--gold);font:600 19px Cinzel;margin-top:18px;padding-top:16px;border-top:1px solid #e7c77e55}
+.reveal.show{display:block}
+.equations{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.eq{background:#0b0e2b;border:1px solid #8d7cc255;color:white;text-align:left;padding:18px;min-height:112px;cursor:pointer}
+.eq.active,.eq:hover{border-color:var(--gold);background:#28204e}
+.formula{display:block;color:#f3d995;font:22px Georgia;margin-bottom:10px}
+.eq small{color:#cbd2f0;font-size:10px;text-transform:uppercase;letter-spacing:.08em}
+.explain{border-left:3px solid var(--gold);background:#e7c77e12;padding:17px;margin-top:12px;color:#fff;font-size:13px;line-height:1.7;min-height:85px}
+.diagram{background:radial-gradient(circle at 50% 45%,#46327388,transparent 60%),#0d1030;border:1px solid #a994dc55;padding:10px;min-height:320px;display:grid;place-items:center}
+.diagram svg{width:100%;max-height:390px}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+.tile{background:#111431;border:1px solid #8d7cc255;padding:18px}
+.tile b{color:var(--gold);font:14px Cinzel}
+.tile p{font-size:12px;margin-bottom:0}
+.quote{font:clamp(23px,3.4vw,43px)/1.5 Cinzel;color:white;text-align:center;max-width:950px;margin:25px auto}
+.quote span{color:var(--gold)}
+footer{position:fixed;bottom:0;left:0;right:0;height:58px;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:0 4vw;background:#090b24cc;border-top:1px solid #e7c77e33}
+.controls{display:flex;gap:10px}
+.controls button{background:#17183a;border:1px solid #e7c77e77;color:white;padding:9px 15px;cursor:pointer}
+.controls button:hover{background:#34245e}
+.progress{height:2px;background:#e7c77e;position:fixed;bottom:58px;left:0;width:14.28%;z-index:25;transition:width .3s}
+@media(max-width:800px){
+header{padding:0 14px}
+.logo{font-size:10px}
+nav{display:none}
+.deck{padding:82px 18px 72px}
+.slide.active{align-items:flex-start}
+.content{padding-top:14px}
+.grid,.hero-grid{grid-template-columns:1fr;gap:18px}
+.hero-image{height:32vh;min-height:190px;order:-1}
+.hero h1{font-size:clamp(34px,10vw,58px)}
+.hero .subtitle{margin-top:12px}
+.actions{margin-top:15px}
+.diagram{min-height:210px}
+.tiles{grid-template-columns:1fr}
+.tile{padding:13px}
+.card{padding:17px}
+.equations{gap:8px}
+.eq{padding:12px;min-height:94px}
+.formula{font-size:18px}
+.section-title{font-size:30px}
+footer{padding:0 14px}
+.small{font-size:9px}
+}
+@media(max-height:650px) and (min-width:801px){
+.deck{padding-top:75px;padding-bottom:65px}
+.hero-image{height:68vh;min-height:0}
+.content{padding-top:0}
+.diagram{min-height:230px}
 }
 </style>
 </head>
-
 <body>
-
 <header>
-  <div class="logo">
-    <span class="seal">✦</span>
-    <span>
-      OPTICAL SCIENCE<br>
-      <small style="font:9px Montserrat;letter-spacing:.2em;color:#cbd2f0">
-        DOSSIER SECRET
-      </small>
-    </span>
-  </div>
-
-  <nav id="nav">
-    <button class="active" data-go="0">Accueil</button>
-    <button data-go="1">Le mystère</button>
-    <button data-go="2">Maxwell</button>
-    <button data-go="3">Principe</button>
-    <button data-go="4">Métamatériaux</button>
-    <button data-go="5">Limites</button>
-    <button data-go="6">Conclusion</button>
-  </nav>
-
-  <div class="counter" id="counter">01 / 07</div>
+ <div class="logo"><span class="seal">✦</span><span>OPTICAL SCIENCE<br><small style="font:9px Montserrat;letter-spacing:.2em;color:#cbd2f0">DOSSIER SECRET</small></span></div>
+ <nav id="nav">
+  <button class="active" data-go="0">Accueil</button><button data-go="1">Le mystère</button><button data-go="2">Maxwell</button><button data-go="3">Principe</button><button data-go="4">Métamatériaux</button><button data-go="5">Limites</button><button data-go="6">Conclusion</button>
+ </nav>
+ <div class="counter" id="counter">01 / 07</div>
 </header>
 
 <main class="deck">
-
-<!-- SLIDE 1 : ACCUEIL -->
-
+<!-- 1 -->
 <section class="slide active" data-title="Accueil">
-  <div class="content grid hero-grid">
-
-    <div class="hero-text">
-      <div class="kicker">Une exploration entre magie et science</div>
-
-      <h1>
-        L'INVISIBILITÉ
-        <span>OPTIQUE</span>
-      </h1>
-
-      <p class="subtitle">
-        Et si la lumière pouvait être guidée au point de rendre
-        un objet presque imperceptible ? Ouvrons les portes d'un
-        univers où les lois de la physique rencontrent un rêve ancien.
-      </p>
-
-      <div class="actions">
-        <button class="btn gold" onclick="go(1)">
-          Entrer dans le mystère ✧
-        </button>
-
-        <button class="btn" onclick="go(2)">
-          Explorer la science
-        </button>
-      </div>
-
-      <p class="small" style="margin-top:24px">
-        LES MÉTAMATÉRIAUX · LES ONDES · LE CONTRÔLE DE LA LUMIÈRE
-      </p>
-    </div>
-
-    <div class="hero-image">
-
-      <div class="image-fallback" id="fallback">
-        <svg viewBox="0 0 600 700">
-          <defs>
-            <radialGradient id="glow">
-              <stop stop-color="#d8bdff" stop-opacity=".9"/>
-              <stop offset="1" stop-color="#5a3c91" stop-opacity="0"/>
-            </radialGradient>
-
-            <linearGradient id="robe" x2="1" y2="1">
-              <stop stop-color="#6c54a0"/>
-              <stop offset="1" stop-color="#10142f"/>
-            </linearGradient>
-          </defs>
-
-          <circle cx="300" cy="230" r="220" fill="url(#glow)"/>
-
-          <g fill="#10132f" stroke="#d9c58e" stroke-width="2">
-            <path d="M35 450V270l50-70 50 70v180
-                     M115 450V230l45-55 45 55v220
-                     M395 450V240l55-65 55 65v210
-                     M475 450V290l45-70 45 70v160"/>
-          </g>
-
-          <path d="M180 650Q205 430 300 420Q395 430 420 650Z"
-                fill="url(#robe)" stroke="#d9c58e" stroke-width="2"/>
-
-          <circle cx="300" cy="345" r="62" fill="#d5b49c"/>
-
-          <path d="M238 340Q240 255 300 260Q365 260 365 340
-                   L350 315Q320 290 275 315L245 355Z"
-                fill="#201a27"/>
-
-          <path d="M240 325Q300 275 360 325L350 295Q300 245 250 295Z"
-                fill="#151124"/>
-
-          <path d="M238 335l-28-130 90-70 85 75-25 125Z"
-                fill="#17142b" stroke="#d9c58e" stroke-width="2"/>
-
-          <path d="M300 400L410 185"
-                stroke="#f3d995" stroke-width="4" stroke-linecap="round"/>
-
-          <g fill="#fff">
-            <circle cx="90" cy="100" r="3"/>
-            <circle cx="480" cy="95" r="3"/>
-            <circle cx="520" cy="330" r="2"/>
-            <circle cx="120" cy="330" r="2"/>
-          </g>
-
-          <g fill="#e7c77e" font-size="24">
-            <text x="90" y="170">✦</text>
-            <text x="470" y="160">✧</text>
-            <text x="485" y="390">✦</text>
-          </g>
-        </svg>
-      </div>
-
-      <!-- Add your Harry Potter image in the images folder -->
-      <img
-        id="wizardPhoto"
-        src="images/harry-potter.jpg"
-        alt="Harry Potter"
-        onload="document.getElementById('fallback').style.display='none'"
-        onerror="this.style.display='none'"
-      >
-
-      <div class="magic-frame"></div>
-
-      <div class="image-caption">
-        LE MONDE DE LA MAGIE · L'INSPIRATION DE NOTRE ENQUÊTE
-      </div>
-    </div>
-
+ <div class="content grid hero-grid">
+  <div class="hero-text">
+   <div class="kicker">Une exploration entre magie et science</div>
+   <h1>L'INVISIBILITÉ <span>OPTIQUE</span></h1>
+   <div class="authors">
+    <p class="authors-label">Présenté par</p>
+    <p class="authors-names">Imene Oudjit &amp; Ghouila Kaouther</p>
+    <p class="authors-note">Deux jeunes chercheuses</p>
+   </div>
+   <p class="subtitle">Et si la lumière pouvait être guidée au point de rendre un objet presque imperceptible ? Ouvrons les portes d'un univers où les lois de la physique rencontrent un rêve ancien.</p>
+   <div class="actions"><button class="btn gold" onclick="go(1)">Entrer dans le mystère ✧</button><button class="btn" onclick="go(2)">Explorer la science</button></div>
+   <p class="small" style="margin-top:24px">LES MÉTAMATÉRIAUX · LES ONDES · LE CONTRÔLE DE LA LUMIÈRE</p>
   </div>
+  <div class="hero-image">
+   <div class="image-fallback" id="fallback">
+    <svg viewBox="0 0 600 700" role="img" aria-label="Illustration magique d'un jeune sorcier devant un château">
+     <defs>
+      <radialGradient id="glow"><stop stop-color="#d8bdff" stop-opacity=".9"/><stop offset="1" stop-color="#5a3c91" stop-opacity="0"/></radialGradient>
+      <linearGradient id="robe" x2="1" y2="1"><stop stop-color="#6c54a0"/><stop offset="1" stop-color="#10142f"/></linearGradient>
+     </defs>
+     <circle cx="300" cy="230" r="220" fill="url(#glow)"/>
+     <g fill="#10132f" stroke="#d9c58e" stroke-width="2" opacity=".95">
+      <path d="M35 450V270l50-70 50 70v180M115 450V230l45-55 45 55v220M395 450V240l55-65 55 65v210M475 450V290l45-70 45 70v160"/>
+      <path d="M35 270h100M115 230h90M395 240h110M475 290h90"/>
+      <path d="M68 450v-85q17-30 34 0v85M145 450v-95q15-25 30 0v95M430 450v-90q18-30 36 0v90M510 450v-70q15-25 30 0v70"/>
+     </g>
+     <path d="M180 650Q205 430 300 420Q395 430 420 650Z" fill="url(#robe)" stroke="#d9c58e" stroke-width="2"/>
+     <circle cx="300" cy="345" r="62" fill="#d5b49c"/>
+     <path d="M238 340Q240 255 300 260Q365 260 365 340L350 315Q320 290 275 315L245 355Z" fill="#201a27"/>
+     <path d="M240 325Q300 275 360 325L350 295Q300 245 250 295Z" fill="#151124"/>
+     <path d="M238 335l-28-130 90-70 85 75-25 125Z" fill="#17142b" stroke="#d9c58e" stroke-width="2"/>
+     <path d="M210 205l90-70 85 75" fill="none" stroke="#e7c77e" stroke-width="3"/>
+     <path d="M300 400L410 185" stroke="#f3d995" stroke-width="4" stroke-linecap="round"/>
+     <path d="M410 185l-10 24 18-7" fill="#f3d995"/>
+     <g fill="#fff"><circle cx="90" cy="100" r="3"/><circle cx="480" cy="95" r="3"/><circle cx="520" cy="330" r="2"/><circle cx="120" cy="330" r="2"/></g>
+     <g fill="#e7c77e" font-size="24"><text x="90" y="170">✦</text><text x="470" y="160">✧</text><text x="485" y="390">✦</text></g>
+    </svg>
+   </div>
+   <img id="wizardPhoto" src="images/harry-potter.jpg" alt="Image de Harry Potter" onload="document.getElementById('fallback').style.display='none'" onerror="this.style.display='none'">
+   <div class="magic-frame"></div><div class="image-caption">LE MONDE DE LA MAGIE · L'INSPIRATION DE NOTRE ENQUÊTE</div>
+  </div>
+ </div>
 </section>
 
-<!-- SLIDE 2 : LE MYSTÈRE -->
-
+<!-- 2 -->
 <section class="slide" data-title="Le mystère">
-  <div class="content grid">
-
-    <div>
-      <div class="kicker">01 · Le mystère de Poudlard</div>
-
-      <h2>
-        Un objet légendaire…<br>
-        un défi pour la science.
-      </h2>
-
-      <div class="card">
-        <p class="riddle">
-          « Je recouvre celui qui me porte. Sous mes plis,
-          sa silhouette s'efface et les regards ne peuvent
-          plus le distinguer. Qui suis-je ? »
-        </p>
-
-        <button class="btn gold" id="revealBtn"
-          onclick="
-            document.getElementById('answer').classList.add('show');
-            this.textContent='Mystère révélé ✦';
-          ">
-          Révéler le mystère
-        </button>
-
-        <div class="reveal" id="answer">
-          LA CAPE D'INVISIBILITÉ !
-        </div>
-      </div>
-    </div>
-
-    <div class="diagram">
-      <svg viewBox="0 0 520 390">
-        <defs>
-          <radialGradient id="cloakGlow">
-            <stop stop-color="#e7c77e" stop-opacity=".45"/>
-            <stop offset="1" stop-color="#7652ad" stop-opacity="0"/>
-          </radialGradient>
-
-          <linearGradient id="cloak" x2="1" y2="1">
-            <stop stop-color="#bca1e7"/>
-            <stop offset=".5" stop-color="#55427f"/>
-            <stop offset="1" stop-color="#11152f"/>
-          </linearGradient>
-        </defs>
-
-        <circle cx="260" cy="185" r="165" fill="url(#cloakGlow)"/>
-
-        <path d="M205 70Q260 35 315 70L370 320
-                 Q260 370 150 320Z"
-              fill="url(#cloak)" stroke="#e7c77e" stroke-width="2"/>
-
-        <path d="M205 70Q260 130 315 70M260 80V345
-                 M180 180Q260 220 340 180"
-              fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="2"/>
-
-        <g fill="none" stroke="#e7c77e" stroke-dasharray="5 8">
-          <path d="M30 130Q120 70 170 160"/>
-          <path d="M350 160Q420 70 490 130"/>
-          <path d="M25 260Q110 330 160 270"/>
-          <path d="M360 270Q420 330 495 260"/>
-        </g>
-      </svg>
-    </div>
-
+ <div class="content grid">
+  <div>
+   <div class="kicker">01 · Le mystère de Poudlard</div>
+   <h2>Un objet légendaire…<br>un défi pour la science.</h2>
+   <div class="card">
+    <p class="riddle">« Je recouvre celui qui me porte. Sous mes plis, sa silhouette s'efface et les regards ne peuvent plus le distinguer. Qui suis-je ? »</p>
+    <button class="btn gold" id="revealBtn" onclick="document.getElementById('answer').classList.add('show');this.textContent='Mystère révélé ✦'">Révéler le mystère</button>
+    <div class="reveal" id="answer">LA CAPE D'INVISIBILITÉ !</div>
+   </div>
   </div>
+  <div class="diagram">
+   <svg viewBox="0 0 520 390" aria-label="Cape mystérieuse">
+    <defs><radialGradient id="cloakGlow"><stop stop-color="#e7c77e" stop-opacity=".45"/><stop offset="1" stop-color="#7652ad" stop-opacity="0"/></radialGradient><linearGradient id="cloak" x2="1" y2="1"><stop stop-color="#bca1e7"/><stop offset=".5" stop-color="#55427f"/><stop offset="1" stop-color="#11152f"/></linearGradient></defs>
+    <circle cx="260" cy="185" r="165" fill="url(#cloakGlow)"/>
+    <path d="M205 70Q260 35 315 70L370 320Q260 370 150 320Z" fill="url(#cloak)" stroke="#e7c77e" stroke-width="2"/>
+    <path d="M205 70Q260 130 315 70M260 80V345M180 180Q260 220 340 180" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="2"/>
+    <g fill="none" stroke="#e7c77e" stroke-dasharray="5 8"><path d="M30 130Q120 70 170 160M350 160Q420 70 490 130M25 260Q110 330 160 270M360 270Q420 330 495 260"/></g>
+    <g fill="#fff"><circle cx="95" cy="65" r="3"/><circle cx="430" cy="70" r="2"/><circle cx="450" cy="330" r="3"/></g>
+   </svg>
+  </div>
+ </div>
 </section>
 
-<!-- SLIDE 3 : MAXWELL -->
-
+<!-- 3 -->
 <section class="slide" data-title="Maxwell">
-  <div class="content">
-
-    <div class="kicker">02 · Les fondements physiques</div>
-
-    <h2>Maxwell : les lois qui décrivent la lumière</h2>
-
-    <p>
-      La lumière est une onde électromagnétique.
-      Les équations de Maxwell décrivent les relations entre
-      les champs électriques et magnétiques. Cliquez sur
-      chaque équation pour comprendre son rôle.
-    </p>
-
-    <div class="grid" style="margin-top:20px">
-
-      <div>
-        <div class="equations">
-
-          <button class="eq active"
-            data-text="La divergence de D est liée à la densité de charge électrique ρ : les charges sont les sources du champ électrique.">
-            <span class="formula">∇ · D = ρ</span>
-            <small>Loi de Gauss électrique</small>
-          </button>
-
-          <button class="eq"
-            data-text="La divergence de B est nulle : il n'existe pas de monopôle magnétique isolé dans cette formulation.">
-            <span class="formula">∇ · B = 0</span>
-            <small>Loi de Gauss magnétique</small>
-          </button>
-
-          <button class="eq"
-            data-text="Un champ magnétique variable dans le temps crée un champ électrique : c'est l'induction électromagnétique.">
-            <span class="formula">∇ × E = −∂B/∂t</span>
-            <small>Loi de Faraday</small>
-          </button>
-
-          <button class="eq"
-            data-text="Le courant électrique J et la variation temporelle de D contribuent à créer un champ magnétique.">
-            <span class="formula">∇ × H = J + ∂D/∂t</span>
-            <small>Loi d'Ampère-Maxwell</small>
-          </button>
-
-        </div>
-
-        <div class="explain" id="explain">
-          La divergence de D est liée à la densité de charge
-          électrique ρ : les charges sont les sources du champ électrique.
-        </div>
-      </div>
-
-      <div class="diagram">
-        <svg viewBox="0 0 520 330">
-          <path d="M30 165H490" stroke="#e7c77e" stroke-width="2"/>
-
-          <path
-            d="M30 165C75 55 120 55 165 165S255 275 300 165S390 55 435 165S480 220 495 165"
-            fill="none" stroke="#c6a8ff" stroke-width="4"/>
-
-          <path
-            d="M30 165C75 130 120 130 165 165S255 200 300 165S390 130 435 165S480 180 495 165"
-            fill="none" stroke="#e7c77e" stroke-width="3"/>
-
-          <text x="300" y="60" fill="#c6a8ff" font-size="20">E</text>
-          <text x="300" y="235" fill="#e7c77e" font-size="20">B</text>
-          <text x="400" y="145" fill="white" font-size="12">Propagation</text>
-        </svg>
-      </div>
-
+ <div class="content">
+  <div class="kicker">02 · Les fondements physiques</div>
+  <h2>Maxwell : les lois qui décrivent la lumière</h2>
+  <p>La lumière est une onde électromagnétique. Les équations de Maxwell décrivent les relations entre les champs électriques et magnétiques. Cliquez sur chaque équation pour comprendre son rôle.</p>
+  <div class="grid" style="margin-top:20px">
+   <div>
+    <div class="equations">
+     <button class="eq active" data-text="La divergence de D est liée à la densité de charge électrique ρ : les charges sont les sources du champ électrique."><span class="formula">∇ · D = ρ</span><small>Loi de Gauss électrique</small></button>
+     <button class="eq" data-text="La divergence de B est nulle : il n'existe pas de monopôle magnétique isolé dans cette formulation."><span class="formula">∇ · B = 0</span><small>Loi de Gauss magnétique</small></button>
+     <button class="eq" data-text="Un champ magnétique variable dans le temps crée un champ électrique : c'est l'induction électromagnétique."><span class="formula">∇ × E = −∂B/∂t</span><small>Loi de Faraday</small></button>
+     <button class="eq" data-text="Le courant électrique J et la variation temporelle de D contribuent à créer un champ magnétique."><span class="formula">∇ × H = J + ∂D/∂t</span><small>Loi d'Ampère-Maxwell</small></button>
     </div>
+    <div class="explain" id="explain">La divergence de D est liée à la densité de charge électrique ρ : les charges sont les sources du champ électrique.</div>
+   </div>
+   <div class="diagram">
+    <svg viewBox="0 0 520 330" aria-label="Onde électromagnétique">
+     <path d="M30 165H490" stroke="#e7c77e" stroke-width="2"/>
+     <path d="M30 165C75 55 120 55 165 165S255 275 300 165S390 55 435 165S480 220 495 165" fill="none" stroke="#c6a8ff" stroke-width="4"/>
+     <path d="M30 165C75 130 120 130 165 165S255 200 300 165S390 130 435 165S480 180 495 165" fill="none" stroke="#e7c77e" stroke-width="3"/>
+     <text x="300" y="60" fill="#c6a8ff" font-size="20">E</text><text x="300" y="235" fill="#e7c77e" font-size="20">B</text><text x="400" y="145" fill="white" font-size="12">Propagation</text>
+    </svg>
+   </div>
   </div>
+ </div>
 </section>
 
-<!-- SLIDE 4 : PRINCIPE -->
-
+<!-- 4 -->
 <section class="slide" data-title="Principe">
-  <div class="content">
-
-    <div class="kicker">03 · Le principe du camouflage optique</div>
-
-    <h2>Et si la lumière contournait l'objet ?</h2>
-
-    <div class="grid">
-
-      <div class="diagram">
-        <svg viewBox="0 0 620 390">
-
-          <g stroke="#f3d995" stroke-width="3" fill="none">
-            <path d="M20 95H150Q205 95 225 45Q270 0 315 45Q335 95 390 95H600"/>
-            <path d="M20 195H150Q205 195 225 145Q270 100 315 145Q335 195 390 195H600"/>
-            <path d="M20 295H150Q205 295 225 345Q270 390 315 345Q335 295 390 295H600"/>
-          </g>
-
-          <ellipse cx="270" cy="195" rx="82" ry="62"
-            fill="#9b83d7" fill-opacity=".13"
-            stroke="#c6a8ff" stroke-dasharray="7 7" stroke-width="2"/>
-
-          <rect x="247" y="172" width="46" height="46" rx="6"
-            fill="#090b24" stroke="#fff" stroke-width="2"/>
-
-          <text x="270" y="245" fill="white" text-anchor="middle" font-size="13">
-            Objet
-          </text>
-        </svg>
-      </div>
-
-      <div>
-        <h3>Guider les ondes autour d'une zone</h3>
-
-        <p>
-          Un objet ordinaire diffuse et réfléchit une partie de la lumière.
-          Certains dispositifs cherchent à réduire ces perturbations
-          en contrôlant la propagation des ondes autour de la zone
-          à dissimuler.
-        </p>
-
-        <div class="card">
-          <h3>À retenir</h3>
-          <p>
-            Il ne s'agit pas de faire disparaître la matière,
-            mais de modifier la manière dont la lumière interagit
-            avec elle et se propage dans son environnement.
-          </p>
-        </div>
-      </div>
-
-    </div>
+ <div class="content">
+  <div class="kicker">03 · Le principe du camouflage optique</div>
+  <h2>Et si la lumière contournait l'objet ?</h2>
+  <div class="grid">
+   <div class="diagram">
+    <svg viewBox="0 0 620 390" aria-label="Rayons lumineux contournant un objet">
+     <g stroke="#f3d995" stroke-width="3" fill="none">
+      <path d="M20 95H150Q205 95 225 45Q270 0 315 45Q335 95 390 95H600"/>
+      <path d="M20 195H150Q205 195 225 145Q270 100 315 145Q335 195 390 195H600"/>
+      <path d="M20 295H150Q205 295 225 345Q270 390 315 345Q335 295 390 295H600"/>
+     </g>
+     <ellipse cx="270" cy="195" rx="82" ry="62" fill="#9b83d7" fill-opacity=".13" stroke="#c6a8ff" stroke-dasharray="7 7" stroke-width="2"/>
+     <rect x="247" y="172" width="46" height="46" rx="6" fill="#090b24" stroke="#fff" stroke-width="2"/>
+     <text x="270" y="245" fill="white" text-anchor="middle" font-size="13">Objet</text>
+    </svg>
+   </div>
+   <div>
+    <h3>Guider les ondes autour d'une zone</h3>
+    <p>Un objet ordinaire diffuse et réfléchit une partie de la lumière. Certains dispositifs cherchent à réduire ces perturbations en contrôlant la propagation des ondes autour de la zone à dissimuler.</p>
+    <div class="card"><h3>À retenir</h3><p>Il ne s'agit pas de faire disparaître la matière, mais de modifier la manière dont la lumière interagit avec elle et se propage dans son environnement.</p></div>
+   </div>
   </div>
+ </div>
 </section>
 
-<!-- SLIDE 5 : MÉTAMATÉRIAUX -->
-
+<!-- 5 -->
 <section class="slide" data-title="Métamatériaux">
-  <div class="content">
-
-    <div class="kicker">04 · Une révolution scientifique</div>
-
-    <h2>Les métamatériaux : concevoir l'inattendu</h2>
-
-    <div class="grid">
-
-      <div class="diagram">
-        <svg viewBox="0 0 520 350">
-
-          <g transform="translate(45 45)" stroke="#e7c77e"
-             fill="none" stroke-width="2">
-
-            <rect width="430" height="250" opacity=".25"/>
-
-            <g>
-              <rect x="0" y="0" width="85" height="65" rx="8"/>
-              <rect x="110" y="0" width="85" height="65" rx="8"/>
-              <rect x="220" y="0" width="85" height="65" rx="8"/>
-              <rect x="330" y="0" width="85" height="65" rx="8"/>
-
-              <rect x="0" y="90" width="85" height="65" rx="8"/>
-              <rect x="110" y="90" width="85" height="65" rx="8"/>
-              <rect x="220" y="90" width="85" height="65" rx="8"/>
-              <rect x="330" y="90" width="85" height="65" rx="8"/>
-
-              <rect x="0" y="180" width="85" height="65" rx="8"/>
-              <rect x="110" y="180" width="85" height="65" rx="8"/>
-              <rect x="220" y="180" width="85" height="65" rx="8"/>
-              <rect x="330" y="180" width="85" height="65" rx="8"/>
-            </g>
-
-            <g stroke="#c6a8ff" stroke-width="4">
-              <path d="M20 32H65M42 12V52"/>
-              <path d="M130 32H175M152 12V52"/>
-              <path d="M240 32H285M262 12V52"/>
-              <path d="M350 32H395M372 12V52"/>
-
-              <path d="M20 122H65M42 102V142"/>
-              <path d="M130 122H175M152 102V142"/>
-              <path d="M240 122H285M262 102V142"/>
-              <path d="M350 122H395M372 102V142"/>
-
-              <path d="M20 212H65M42 192V232"/>
-              <path d="M130 212H175M152 192V232"/>
-              <path d="M240 212H285M262 192V232"/>
-              <path d="M350 212H395M372 192V232"/>
-            </g>
-
-          </g>
-        </svg>
-      </div>
-
-      <div>
-        <h3>Une matière dont on dessine les propriétés</h3>
-
-        <p>
-          Leur secret réside dans leur architecture :
-          des structures artificielles organisées à très petite
-          échelle peuvent donner au matériau des propriétés
-          électromagnétiques inhabituelles.
-        </p>
-
-        <p>
-          En ajustant la forme, la taille et l'agencement de leurs
-          éléments, les chercheurs peuvent influencer la réponse
-          du matériau aux ondes.
-        </p>
-      </div>
-
-    </div>
-
-    <div class="tiles">
-
-      <div class="tile">
-        <b>01 · Structure</b>
-        <p>Des motifs conçus avec précision et répétés à une échelle adaptée.</p>
-      </div>
-
-      <div class="tile">
-        <b>02 · Réponse</b>
-        <p>Le comportement global dépend de la géométrie des cellules.</p>
-      </div>
-
-      <div class="tile">
-        <b>03 · Application</b>
-        <p>Une piste pour guider les ondes et concevoir des dispositifs optiques.</p>
-      </div>
-
-    </div>
+ <div class="content">
+  <div class="kicker">04 · Une révolution scientifique</div>
+  <h2>Les métamatériaux : concevoir l'inattendu</h2>
+  <div class="grid">
+   <div class="diagram">
+    <svg viewBox="0 0 520 350" aria-label="Réseau de cellules de métamatériau">
+     <g transform="translate(45 45)" stroke="#e7c77e" fill="none" stroke-width="2">
+      <rect width="430" height="250" opacity=".25"/>
+      <g>
+       <rect x="0" y="0" width="85" height="65" rx="8"/><rect x="110" y="0" width="85" height="65" rx="8"/><rect x="220" y="0" width="85" height="65" rx="8"/><rect x="330" y="0" width="85" height="65" rx="8"/>
+       <rect x="0" y="90" width="85" height="65" rx="8"/><rect x="110" y="90" width="85" height="65" rx="8"/><rect x="220" y="90" width="85" height="65" rx="8"/><rect x="330" y="90" width="85" height="65" rx="8"/>
+       <rect x="0" y="180" width="85" height="65" rx="8"/><rect x="110" y="180" width="85" height="65" rx="8"/><rect x="220" y="180" width="85" height="65" rx="8"/><rect x="330" y="180" width="85" height="65" rx="8"/>
+      </g>
+      <g stroke="#c6a8ff" stroke-width="4"><path d="M20 32H65M42 12V52M130 32H175M152 12V52M240 32H285M262 12V52M350 32H395M372 12V52M20 122H65M42 102V142M130 122H175M152 102V142M240 122H285M262 102V142M350 122H395M372 102V142M20 212H65M42 192V232M130 212H175M152 192V232M240 212H285M262 192V232M350 212H395M372 192V232"/></g>
+     </g>
+    </svg>
+   </div>
+   <div>
+    <h3>Une matière dont on dessine les propriétés</h3>
+    <p>Leur secret réside dans leur architecture : des structures artificielles organisées à très petite échelle peuvent donner au matériau des propriétés électromagnétiques inhabituelles.</p>
+    <p>En ajustant la forme, la taille et l'agencement de leurs éléments, les chercheurs peuvent influencer la réponse du matériau aux ondes.</p>
+   </div>
   </div>
+  <div class="tiles">
+   <div class="tile"><b>01 · Structure</b><p>Des motifs conçus avec précision et répétés à une échelle adaptée.</p></div>
+   <div class="tile"><b>02 · Réponse</b><p>Le comportement global dépend de la géométrie des cellules.</p></div>
+   <div class="tile"><b>03 · Application</b><p>Une piste pour guider les ondes et concevoir des dispositifs optiques.</p></div>
+  </div>
+ </div>
 </section>
 
-<!-- SLIDE 6 : LIMITES -->
-
+<!-- 6 -->
 <section class="slide" data-title="Limites">
-  <div class="content">
-
-    <div class="kicker">05 · Entre laboratoire et réalité</div>
-
-    <h2>Des avancées réelles, des limites présentes</h2>
-
-    <p>
-      Les expériences de camouflage électromagnétique ont montré
-      des effets intéressants, mais elles ne reproduisent pas
-      la cape parfaite des récits fantastiques.
-    </p>
-
-    <div class="tiles" style="margin-top:34px">
-
-      <div class="tile">
-        <b>Ce qui est possible</b>
-        <h3>Des démonstrations ciblées</h3>
-        <p>
-          Des dispositifs peuvent réduire la diffusion ou guider
-          certaines ondes dans des conditions expérimentales précises.
-        </p>
-      </div>
-
-      <div class="tile">
-        <b>Ce qui reste difficile</b>
-        <h3>Le spectre visible</h3>
-        <p>
-          Un camouflage efficace pour toutes les couleurs,
-          directions et polarisations reste complexe.
-        </p>
-      </div>
-
-      <div class="tile">
-        <b>Le défi</b>
-        <h3>La fabrication</h3>
-        <p>
-          Les structures exigent une grande précision et doivent
-          limiter les pertes et imperfections.
-        </p>
-      </div>
-
-    </div>
-
-    <div class="grid" style="margin-top:28px;gap:18px">
-
-      <div class="card">
-        <h3>Comprendre</h3>
-        <p>Décrire les ondes avec les lois de l'électromagnétisme.</p>
-      </div>
-
-      <div class="card">
-        <h3>Concevoir & vérifier</h3>
-        <p>
-          Créer une structure, puis tester ses performances
-          dans des conditions mesurables.
-        </p>
-      </div>
-
-    </div>
+ <div class="content">
+  <div class="kicker">05 · Entre laboratoire et réalité</div>
+  <h2>Des avancées réelles, des limites présentes</h2>
+  <p>Les expériences de camouflage électromagnétique ont montré des effets intéressants, mais elles ne reproduisent pas la cape parfaite des récits fantastiques.</p>
+  <div class="tiles" style="margin-top:34px">
+   <div class="tile"><b>Ce qui est possible</b><h3>Des démonstrations ciblées</h3><p>Des dispositifs peuvent réduire la diffusion ou guider certaines ondes dans des conditions expérimentales précises.</p></div>
+   <div class="tile"><b>Ce qui reste difficile</b><h3>Le spectre visible</h3><p>Un camouflage efficace pour toutes les couleurs, directions et polarisations reste complexe.</p></div>
+   <div class="tile"><b>Le défi</b><h3>La fabrication</h3><p>Les structures exigent une grande précision et doivent limiter les pertes et imperfections.</p></div>
   </div>
+  <div class="grid" style="margin-top:28px;gap:18px">
+   <div class="card"><h3>Comprendre</h3><p>Décrire les ondes avec les lois de l'électromagnétisme.</p></div>
+   <div class="card"><h3>Concevoir & vérifier</h3><p>Créer une structure, puis tester ses performances dans des conditions mesurables.</p></div>
+  </div>
+ </div>
 </section>
 
-<!-- SLIDE 7 : CONCLUSION -->
-
+<!-- 7 -->
 <section class="slide" data-title="Conclusion">
-  <div class="content">
-
-    <div class="kicker" style="text-align:center">
-      06 · Le mot de la fin
-    </div>
-
-    <h2 style="text-align:center">Au-delà de l'invisibilité</h2>
-
-    <div class="grid" style="margin-top:25px">
-
-      <div class="card">
-        <h3>Des horizons prometteurs</h3>
-
-        <p>
-          Optique, imagerie, télécommunications et recherche :
-          le contrôle des ondes inspire de nouvelles technologies.
-        </p>
-
-        <p>
-          La cape parfaite appartient encore à la fiction,
-          mais la recherche sur les métamatériaux ouvre
-          des perspectives fascinantes.
-        </p>
-      </div>
-
-      <div class="diagram" style="min-height:240px">
-        <svg viewBox="0 0 450 280">
-
-          <path d="M220 25C120 75 120 205 220 255
-                   C320 205 320 75 220 25Z"
-                fill="#9b83d7" fill-opacity=".2"
-                stroke="#e7c77e" stroke-width="2"/>
-
-          <g stroke="#f3d995" stroke-width="2.5" fill="none">
-            <path d="M15 85H140Q190 85 220 140Q250 195 310 195H435"/>
-            <path d="M15 140H435"/>
-            <path d="M15 195H140Q190 195 220 140Q250 85 310 85H435"/>
-          </g>
-
-        </svg>
-      </div>
-
-    </div>
-
-    <p class="quote">
-      « La magie nous invite à rêver.<br>
-      <span>La science nous apprend à comprendre.</span> »
-    </p>
-
-    <div style="text-align:center">
-      <button class="btn gold" onclick="go(0)">
-        Recommencer l'exploration ✧
-      </button>
-    </div>
-
+ <div class="content">
+  <div class="kicker" style="text-align:center">06 · Le mot de la fin</div>
+  <h2 style="text-align:center">Au-delà de l'invisibilité</h2>
+  <div class="grid" style="margin-top:25px">
+   <div class="card"><h3>Des horizons prometteurs</h3><p>Optique, imagerie, télécommunications et recherche : le contrôle des ondes inspire de nouvelles technologies.</p><p>La cape parfaite appartient encore à la fiction, mais la recherche sur les métamatériaux ouvre des perspectives fascinantes.</p></div>
+   <div class="diagram" style="min-height:240px">
+    <svg viewBox="0 0 450 280" aria-label="Lumière traversant une lentille">
+     <path d="M220 25C120 75 120 205 220 255C320 205 320 75 220 25Z" fill="#9b83d7" fill-opacity=".2" stroke="#e7c77e" stroke-width="2"/>
+     <g stroke="#f3d995" stroke-width="2.5" fill="none"><path d="M15 85H140Q190 85 220 140Q250 195 310 195H435"/><path d="M15 140H435"/><path d="M15 195H140Q190 195 220 140Q250 85 310 85H435"/></g>
+    </svg>
+   </div>
   </div>
+  <p class="quote">« La magie nous invite à rêver.<br><span>La science nous apprend à comprendre.</span> »</p>
+  <div style="text-align:center"><button class="btn gold" onclick="go(0)">Recommencer l'exploration ✧</button></div>
+ </div>
 </section>
-
 </main>
 
 <footer>
-  <div class="small">
-    L'INVISIBILITÉ OPTIQUE · PROJET SCIENTIFIQUE
-  </div>
-
-  <div class="controls">
-    <button onclick="prev()">← Précédent</button>
-    <button onclick="next()">Suivant →</button>
-  </div>
+ <div class="small">L'INVISIBILITÉ OPTIQUE · PROJET SCIENTIFIQUE</div>
+ <div class="controls"><button onclick="prev()">← Précédent</button><button onclick="next()">Suivant →</button></div>
 </footer>
-
 <div class="progress" id="progress"></div>
 
 <script>
-let current = 0;
-
-const slides = [...document.querySelectorAll('.slide')];
-
-const navButtons = [
-  ...document.querySelectorAll('nav button')
-];
-
-function go(index) {
-  current = Math.max(0, Math.min(slides.length - 1, index));
-
-  slides.forEach((slide, i) => {
-    slide.classList.toggle('active', i === current);
-  });
-
-  navButtons.forEach((button, i) => {
-    button.classList.toggle('active', i === current);
-  });
-
-  document.getElementById('counter').textContent =
-    String(current + 1).padStart(2, '0') +
-    ' / ' +
-    String(slides.length).padStart(2, '0');
-
-  document.getElementById('progress').style.width =
-    ((current + 1) / slides.length * 100) + '%';
+let current=0;
+const slides=[...document.querySelectorAll('.slide')];
+const navButtons=[...document.querySelectorAll('nav button')];
+function go(index){
+ current=Math.max(0,Math.min(slides.length-1,index));
+ slides.forEach((s,i)=>s.classList.toggle('active',i===current));
+ navButtons.forEach((b,i)=>b.classList.toggle('active',i===current));
+ document.getElementById('counter').textContent=String(current+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');
+ document.getElementById('progress').style.width=((current+1)/slides.length*100)+'%';
 }
-
-function next() {
-  go(current + 1);
-}
-
-function prev() {
-  go(current - 1);
-}
-
-navButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    go(Number(button.dataset.go));
-  });
+function next(){go(current+1)}
+function prev(){go(current-1)}
+navButtons.forEach(b=>b.addEventListener('click',()=>go(Number(b.dataset.go))));
+document.querySelectorAll('.eq').forEach(b=>b.addEventListener('click',()=>{
+ document.querySelectorAll('.eq').forEach(x=>x.classList.remove('active'));
+ b.classList.add('active');
+ document.getElementById('explain').textContent=b.dataset.text;
+}));
+document.addEventListener('keydown',e=>{
+ if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();next()}
+ if(e.key==='ArrowLeft'){prev()}
 });
-
-document.querySelectorAll('.eq').forEach(button => {
-  button.addEventListener('click', () => {
-
-    document.querySelectorAll('.eq').forEach(item => {
-      item.classList.remove('active');
-    });
-
-    button.classList.add('active');
-
-    document.getElementById('explain').textContent =
-      button.dataset.text;
-  });
-});
-
-document.addEventListener('keydown', event => {
-
-  if (event.key === 'ArrowRight' || event.key === ' ') {
-    event.preventDefault();
-    next();
-  }
-
-  if (event.key === 'ArrowLeft') {
-    prev();
-  }
-
-});
-
 go(0);
 </script>
-
 </body>
 </html>
+
